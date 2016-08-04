@@ -1,0 +1,31 @@
+﻿{ "date" : "1/1/2013",
+  "imageUrl" : "/myscripts/angularjs_fundamentals/img/angularjs-logo.png",
+  "location" : { "address" : "Google Headquarters",
+      "city" : "Mountain View",
+      "province" : "CA"
+    },
+  "name" : "Angular Boot Camp",
+  "sessions" : [ { "abstract" : "In this sesison you will learn the ins and outs of directives!",
+        "creatorName" : "Bob Smith",
+        "duration" : 1,
+        "level" : "Advanced",
+        "name" : "Directives Masterclass",
+        "upVoteCount" : 0
+      },
+      { "abstract" : "This session will take a closer look at scopes.  Learn what they do, how they do it, and how to get them to do it for you.",
+        "creatorName" : "John Doe",
+        "duration" : 2,
+        "level" : "Introductory",
+        "name" : "Scopes for fun and profit",
+        "upVoteCount" : 0
+      },
+      { "abstract" : "Controllers are the beginning of everything Angular does.  Learn how to craft controllers that will win the respect of your friends and neighbors.",
+        "creatorName" : "Jane Doe",
+        "duration" : 4,
+        "level" : "Intermediate",
+        "name" : "Well Behaved Controllers",
+        "upVoteCount" : 0
+      }
+    ],
+  "time" : "10:30 am"
+}

@@ -1,0 +1,17 @@
+﻿<Window x:Class="Explorer.WPF.Examples.MVVM_MessageBus.MessageBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:v="clr-namespace:Explorer.WPF.Examples.MVVM_MessageBus.Views"
+        Title="MessageBus" Height="393" Width="717">
+    <Grid
+        Margin="6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="188*" />
+            <ColumnDefinition
+                Width="317*" />
+        </Grid.ColumnDefinitions>
+        <v:ConferenceView />
+        <v:SessionView
+            Grid.Column="1" />
+    </Grid>
+</Window>

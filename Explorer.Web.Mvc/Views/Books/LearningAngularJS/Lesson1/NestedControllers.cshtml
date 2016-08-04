@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "NestedControllers";
+}
+
+@section css{
+<style>
+    .gray {
+        background: #eee;
+    }
+
+    .person.ng-enter,
+    .person.ng-leave {
+        -webkit-transition: 0.5s linear all;
+        transition: 0.5s linear all;
+    }
+
+        .person.ng-enter,
+        .person.ng-leave.ng-leave-active {
+            opacity: 0;
+        }
+
+            .person.ng-leave,
+            .person.ng-enter.ng-enter-active {
+                opacity: 1;
+            }
+</style>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var myApp = angular.module('MyApp', ['ngAnimate']);
+
+        function ContactsCtrl($scope) {
+            //$scope.people = ['Jack', 'Jill', 'Jane'];
+            $scope.people = [
+                { name: 'Jack', phones: ['555-2323', '756-4324'] },
+                { name: 'Jill', phones: ['555-2233', '324-8542'] },
+                { name: 'Jane', phones: ['555-5223', '222-3232'] }
+            ];
+
+            $scope.add = function() {
+                $scope.people.push(
+                    { name: 'Jane', phones: ['555-5223', '222-3232'] }
+                );
+            }
+        }
+
+        function PersonCtrl($scope) {
+            $scope.show = function() {
+                $scope.person.show_phones = true;
+            }
+
+            $scope.hide = function() {
+                $scope.person.show_phones = false;
+            }
+        }
+    </script>
+
+
+}
+<h3>Controllers keep data separate, not shared if reused...</h3>
+
+<div ng-app="MyApp">
+    <div class="well">
+
+        <div ng-controller="ContactsCtrl">
+            <button ng-click="add()">Add</button>
+            <div ng-repeat="person in people" ng-controller="PersonCtrl" class="person">
+                {{person.name}}
+                <a href="#" ng-click="show()" ng-hide="person.show_phones">Show</a>
+                <a href="#" ng-click="hide()" ng-show="person.show_phones">Hide</a>
+                <div style="margin-left:20px;" ng-show="person.show_phones">
+                    <div ng-repeat="phone in person.phones">
+                        {{phone}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

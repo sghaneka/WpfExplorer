@@ -1,0 +1,42 @@
+﻿@using Explorer.Web.Mvc.Extensions
+@model Explorer.Web.Mvc.ViewModels.LeftNavMenuModel
+
+@{
+    Layout = null;
+}
+
+
+<div class="list-group">
+    @foreach (var leftMenu in Model.LeftNavMenu)
+    {
+        <div class="list-group-item">
+            @leftMenu.Name
+            <div class="list-group">
+                @foreach (var topMenu in leftMenu.MenuItems)
+                {
+                    <div class='@String.Concat("list-group-item noborder ", Html.IsActive(@Model.Controller, @Model.ActionName, topMenu.ControllerName, topMenu.ActionName))'>
+                        @Html.ActionLink(topMenu.Name, topMenu.ActionName, topMenu.ControllerName)
+                    </div>
+                }
+            </div>
+                        @foreach (var subMenus in leftMenu.Menus)
+            {
+                <div class="list-group">
+                    <div class=" list-group-item noborder">
+                    @subMenus.Name
+                        <div class="list-group">
+                            @foreach (var topMenu in subMenus.MenuItems)
+                            {
+                                <div class='@String.Concat("list-group ", "")'>
+                                    @Html.ActionLink(topMenu.Name, topMenu.ActionName, topMenu.ControllerName, null, new { @class = String.Concat("list-group-item noborder ", Html.IsActive(@Model.Controller, @Model.ActionName, topMenu.ControllerName, topMenu.ActionName)) })
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+} 
+
+</div>
+

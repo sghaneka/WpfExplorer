@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "EditProfile";
+}
+
+@section css{
+    <link href="~/myscripts/angularjs_fundamentals/app.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/myscripts/angularjs_fundamentals/app.js"></script>
+    <script src="~/myscripts/angularjs_fundamentals/controllers/EventController.js"></script>
+<script src="~/myscripts/angularjs_fundamentals/controllers/EditProfileController.js"></script>
+    <script src="~/myscripts/angularjs_fundamentals/services/EventData.js"></script>
+<script src="~/myscripts/angularjs_fundamentals/services/GravatarUrlBuilder.js"></script>
+    <script src="~/myscripts/angularjs_fundamentals/filters.js"></script>
+}
+
+<div class="container" ng-app="eventsApp" ng-controller="EditProfileController">
+    <form name="profileForm">
+        <div class="row">
+            <div class="col-md-3">
+                <img ng-src="{{getGravatarUrl(user.emailAddress)}}" />
+            </div>
+            <div class="col-md-3">
+                <fieldset>
+                    <label for="userName">User Name:</label>
+                    <input focus id="userName" required ng-pattern="/^[-A-Za-z0-9]{2,20}$/" type="text" placeholder="Username" ng-model="user.userName" />
+                    <label for="password">Password:</label>
+                    <input id="password" required type="password" placeholder="Password" ng-model="user.password" />
+                </fieldset>
+                <div style="margin-top:15px">
+                    <fieldset>
+                        <label for="name">Name:</label>
+                        <input id="name" type="text" placeholder="Name" ng-model="user.name" />
+                        <label for="emailAddress">Email Address:</label>
+                        <input id="emailAddress" type="email" placeholder="Email Address" ng-model="user.emailAddress" />
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <label for="bio">Bio:</label>
+                <textarea id="bio" rows="6" style="width:97%; color:#52575c" placeholder="Bio" ng-model="user.bio"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="pull-left"><span class="btn">Cancel</span></div>
+                <div class="pull-right"><button type="submit" class="btn btn-primary">Save</button></div>
+            </div>
+        </div>
+    </form>
+</div>

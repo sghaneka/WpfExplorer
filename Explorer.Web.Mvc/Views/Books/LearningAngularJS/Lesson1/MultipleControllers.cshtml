@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "MultipleControllers";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        function CostCtrl($scope) {
+            $scope.cost = 1000.1;
+            // will only work on initial run....
+            // $scope.tax = $scope.cost * .15;
+
+            /*
+            $scope.$watch('cost', function() {
+                $scope.tax = $scope.cost * .15;
+            });*/
+
+            $scope.add_tax = true;
+
+            $scope.$watch('cost', update);
+            $scope.$watch('cost+tax', update);
+            $scope.$watch('add_tax', update);
+            $scope.$watch('shipping', update);
+            $scope.final_bill = 0.0;
+            $scope.add = function () {
+                $scope.final_bill += $scope.total;
+            }
+
+            $scope.shipping_options = [{ amount: 10.0, name: "Flat Rate" },
+            { amount: 20.0, name: "Express" },
+            { amount: 30.0, name: "Super Express" }];
+            $scope.shipping = $scope.shipping_options[2];
+
+            function update() {
+                $scope.tax = $scope.add_tax ? $scope.cost * .15 : 0.0;
+                $scope.total = parseFloat($scope.cost) + $scope.tax + $scope.shipping.amount;
+            }
+        }
+    </script>
+
+}
+<h3>Controllers keep data separate, not shared if reused...</h3>
+
+<div ng-app>
+    <div class="well">
+
+        <div ng-controller="CostCtrl">
+            <div>
+                <input type="checkbox" ng-model="add_tax" />Add Tax
+                <input type="checkbox" ng-model="total_bill" />Show Total
+            </div>
+            Cost: <input type="text" ng-model="cost" placeholder="cost" />
+            Shipping:
+
+            <!--<select ng-model="shipping" ng-options="s.name for s in shipping_options"></select> -->
+            <label ng-repeat="s in shipping_options">
+                <input type="radio" ng-model="$parent.shipping" ng-value="{{s}}"/>{{s.name}}
+            </label><br/>
+            <p>This is your cost: {{cost | currency}}</p>
+            <p>This is your tax: {{tax | currency}}</p>
+
+            <p ng-show="total_bill">This is your total: {{total | currency}}</p>
+            <p ng-show="total_bill">Your running total: {{final_bill | currency}}</p>
+            <button ng-click="add()">Add</button>
+        </div>
+    </div>
+
+    <div class="well">
+        <div ng-controller="CostCtrl">
+            Cost: <input type="text" ng-model="cost" placeholder="cost" />
+            <p>This is your cost: {{cost | currency}}</p>
+        </div>
+    </div>
+
+    <div class="well">
+        <div ng-controller="CostCtrl">
+            Cost: <input type="text" ng-model="cost" placeholder="cost" />
+            <p>This is your cost: {{cost | currency}}</p>
+        </div>
+    </div>
+
+</div>

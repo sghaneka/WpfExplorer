@@ -1,0 +1,41 @@
+﻿<Window x:Class="Explorer.WPF.Examples.Controls.TreeViewFun"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Explorer.WPF.Examples.Controls"
+        Title="TreeView" Height="300" Width="500">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="10,0" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:TreeViewModel></local:TreeViewModel>
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Style="{StaticResource ButtonStyle}">Up</Button>
+            <Button Style="{StaticResource ButtonStyle}">Down</Button>
+            <TextBox Width="300" Margin="10,0"></TextBox>
+        </WrapPanel>
+        <TreeView x:Name="dirTree"  ItemsSource="{Binding Items}" Grid.Column="0" Grid.Row="1" Margin="10,10,10,0" >
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:NodeItem}" ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Name}" Tag="{Binding}" ></TextBlock>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+
+        </TreeView>
+        <ListBox Grid.Column="1" Grid.Row="1" Margin="10,10,0,0">
+
+        </ListBox>
+    </Grid>
+</Window>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="Explorer.WPF.Examples.UserControls.recipie1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:userc="clr-namespace:Explorer.WPF.Examples.UserControls.Controls;assembly="
+      mc:Ignorable="d"      
+	Title="recipie1" d:DesignHeight="164" d:DesignWidth="304">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="4"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>    
+    <Grid Width="309" Height="169">
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <userc:FileInputControl Grid.Row="0" Margin="8" />
+        <StackPanel Grid.Row="1">
+            <userc:PagerControl x:Name="pager" Margin="20,0,0,0" Height="Auto" HorizontalAlignment="Left" Current="1" Total="5" />
+            <GroupBox Header="Test">
+                <StackPanel Orientation="Horizontal" Margin="3">
+                    <Button Name="CurrentDecButton" Content="Current--" VerticalAlignment="Top" Click="CurrentDecButton_Click" />
+                    <Button Name="CurrentIncButton" Content="Current++" VerticalAlignment="Top" Click="CurrentIncButton_Click" />
+                    <Button Name="TotalDecButton" Content="Total--" VerticalAlignment="Top" Click="TotalDecButton_Click" />
+                    <Button Name="TotalIncButton" Content="Total++" VerticalAlignment="Top" Click="TotalIncButton_Click" />
+                </StackPanel>
+            </GroupBox>
+            <userc:SearchControl Height="Auto" HorizontalAlignment="Left" SearchChanged="SearchControl_SearchChanged" />
+        </StackPanel>
+
+
+    </Grid>
+    
+</Window>

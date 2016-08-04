@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Base1";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        (function () {
+            var myapp = angular.module("exampleApp", []);
+
+            myapp.constant("startTime", new Date().toLocaleTimeString());
+
+            // Called when current module is loaded
+            myapp.config(function (startTime) {
+                toastr.success("Main module config: " + startTime);
+            });
+
+            // Called when all modules are loaded
+            myapp.run(function (startTime) {
+                toastr.success("Main module run: " + startTime);
+            });
+
+            var now = new Date();
+            myapp.value("nowValue", now);
+
+            myapp.controller("dayCtrl", function ($scope, days) {
+                $scope.day = days.today;
+            });
+
+            myapp.controller("tomorrowCtrl", function ($scope, days) {
+                //toastr.success('in ctrl... tomorrow: ' + days.tomorrow, 'in tomorrowCtrl');
+                $scope.day = days.tomorrow;
+            });
+
+            myapp.directive("highlight", function ($filter) {
+                var dayFilter = $filter("dayName");
+
+                return function(scope, element, attrs) {
+                    if (dayFilter(scope.day) == attrs["highlight"])
+                        element.css("color", "red");
+                }
+            });
+
+            myapp.filter("dayName", function() {
+                var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday"];
+                return function (input) {
+                    return angular.isNumber(input) ? dayNames[input-1] : input;
+                }
+            });
+
+            myapp.service("days", function (nowValue) {
+                
+                // this.today = new Date().getDay() + 1;                
+                this.today = nowValue.getDay() + 1;
+                this.tomorrow = (this.today == 7) ? 1 : this.today + 1;
+                
+            });
+
+        })();
+    </script>
+   }
+
+<div ng-app="exampleApp">
+    <div class="panel">
+        <div class="page-header">
+            <h3>AngularJS App</h3>
+        </div>
+        <h4 ng-controller="dayCtrl" highlight="Saturday">
+            Today is {{day || "(unknown)" | dayName}}
+        </h4>
+        <h4 ng-controller="tomorrowCtrl">
+            Tomorrow is {{day || "(unknown)" | dayName}} 
+        </h4>
+    </div>
+</div>

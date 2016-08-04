@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{61824DCF-CB36-42F8-95BB-BD4931CD61FD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Explorer.WPF</RootNamespace>
+    <AssemblyName>Explorer.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF4, Version=4.2.30.23173, Culture=neutral, PublicKeyToken=1673db7d5906b0ad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net40\GalaSoft.MvvmLight.Extras.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WPF4, Version=4.2.30.23173, Culture=neutral, PublicKeyToken=63eb5c012e0b3c1c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net40\GalaSoft.MvvmLight.WPF4.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Examples\Async\AsyncDemo.xaml.cs">
+      <DependentUpon>AsyncDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Controls\NodeItem.cs" />
+    <Compile Include="Examples\Controls\TreeViewFun.xaml.cs">
+      <DependentUpon>TreeViewFun.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Controls\TreeViewModel.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\MessageBus.xaml.cs">
+      <DependentUpon>MessageBus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_MessageBus\Messages\SessionSelected.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\Messages\SessionTitleChanged.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\Models\ConferenceService.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\Models\Session.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\ViewModels\ConferenceViewModel.cs" />
+    <Compile Include="Examples\MVVM_StateFull\ViewModels\MainViewModel.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\ViewModels\SessionHeaderViewModel.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\ViewModels\SessionViewModel.cs" />
+    <Compile Include="Examples\MVVM_MessageBus\Views\ConferenceView.xaml.cs">
+      <DependentUpon>ConferenceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_MessageBus\Views\SessionView.xaml.cs">
+      <DependentUpon>SessionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_ViewModelLocator\Messages\SessionSelected.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\Messages\SessionTitleChanged.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\Models\ConferenceService.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\Models\IConferenceService.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\Models\Session.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\ViewModelLocator.xaml.cs">
+      <DependentUpon>ViewModelLocator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_ViewModelLocator\ViewModels\ConferenceViewModel.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\ViewModels\SessionHeaderViewModel.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\ViewModels\SessionViewModel.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Examples\MVVM_ViewModelLocator\Views\ConferenceView.xaml.cs">
+      <DependentUpon>ConferenceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_ViewModelLocator\Views\SessionView.xaml.cs">
+      <DependentUpon>SessionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_ViewServices\Services\IDialogService.cs" />
+    <Compile Include="Examples\MVVM_ViewServices\ViewModels\MainViewModel.cs" />
+    <Compile Include="Examples\MVVM_ViewServices\ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Examples\MVVM_ViewServices\ViewServices.xaml.cs">
+      <DependentUpon>ViewServices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_ViewServices\Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\AddCustomer.xaml.cs">
+      <DependentUpon>AddCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\GroupingDemo.xaml.cs">
+      <DependentUpon>GroupingDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\CrudListDemo.xaml.cs">
+      <DependentUpon>CrudListDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\ListMasterDetails.xaml.cs">
+      <DependentUpon>ListMasterDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\ListBoxDataTrigger.xaml.cs">
+      <DependentUpon>ListBoxDataTrigger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\ListBoxDemo1.xaml.cs">
+      <DependentUpon>ListBoxDemo1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\Messages\CustomerAdded.cs" />
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\Models\CrudListDataService.cs" />
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\Services\IDialogService.cs" />
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\ViewModels\AddCustomerViewModel.cs" />
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\ViewModels\CrudListViewModel.cs" />
+    <Compile Include="Examples\PluralSight_WPF_Business_Course\ViewModels\ViewModelLocater.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Examples\Async\AsyncDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Controls\TreeViewFun.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Events\DirectWiringVsICommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Layout\Grid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\Layout\StackPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\MVVM_MessageBus\MessageBus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\MVVM_StateFull\StateFullViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\MVVM_MessageBus\Views\ConferenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\MVVM_MessageBus\Views\SessionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\MVVM_ViewModelLocator\ViewModelLocator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\MVVM_ViewModelLocator\Views\ConferenceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\MVVM_ViewModelLocator\Views\SessionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\MVVM_ViewServices\ViewServices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\MVVM_ViewServices\Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\PluralSight_WPF_Business_Course\AddCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\PluralSight_WPF_Business_Course\GroupingDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\PluralSight_WPF_Business_Course\CrudListDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\PluralSight_WPF_Business_Course\ListMasterDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\PluralSight_WPF_Business_Course\ListBoxDataTrigger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\PluralSight_WPF_Business_Course\ListBoxDemo1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\Templates\DataTemplateExample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Examples\UserControls\recipie1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\UserControls\Controls\FileInputControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\UserControls\Controls\PagerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Examples\UserControls\Controls\SearchControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\Events\DirectWiringVsICommand.xaml.cs">
+      <DependentUpon>DirectWiringVsICommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Events\MainWindowViewModel.cs" />
+    <Compile Include="Examples\Events\MyCommand.cs" />
+    <Compile Include="Examples\Layout\Grid.xaml.cs">
+      <DependentUpon>Grid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Layout\StackPanel.xaml.cs">
+      <DependentUpon>StackPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\MVVM_StateFull\StateFullViewModel.xaml.cs">
+      <DependentUpon>StateFullViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Templates\DataTemplateExample.xaml.cs">
+      <DependentUpon>DataTemplateExample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\Templates\ModelBase.cs" />
+    <Compile Include="Examples\Templates\Person.cs" />
+    <Compile Include="Examples\UserControls\recipie1.xaml.cs">
+      <DependentUpon>recipie1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UserControls\Controls\FileInputControl.xaml.cs">
+      <DependentUpon>FileInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UserControls\Controls\PagerControl.xaml.cs">
+      <DependentUpon>PagerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UserControls\Controls\SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Resource Include="Resources\MainTopicsDict.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\folder_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\page_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cut.png" />
+    <Resource Include="Icons\page_copy.png" />
+    <Resource Include="Icons\page_paste.png" />
+    <Resource Include="Icons\text_bold.png" />
+    <Resource Include="Icons\text_italic.png" />
+    <Resource Include="Icons\text_underline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Explorer.DataLayer\Explorer.DataLayer.csproj">
+      <Project>{ac986383-0e0a-4491-9bf7-027e303fcb45}</Project>
+      <Name>Explorer.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Explorer.Utils\Explorer.Utils.csproj">
+      <Project>{35274b1b-c42a-4b61-adc2-674719c8e59f}</Project>
+      <Name>Explorer.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="fonts\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "SchoolMVCAngular";
+}
+
+@section css
+{
+    <link href="~/myscripts/udacity_javascriptdesignpatterns/school/normalize.css" rel="stylesheet" />
+    <link href="~/myscripts/udacity_javascriptdesignpatterns/school/style.css" rel="stylesheet" />
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+        
+        /* App.js files */
+
+        //setter of module
+        (function() {
+           angular.module("schoolApp", []);
+        })();
+
+        //filter
+        (function() {
+            angular.module('schoolApp')
+                .filter('posValCount', function() {
+                return function(input) {
+                    var out = [];
+                    angular.forEach(input, function(attendanceRec) {
+                        if (attendanceRec.state)
+                            out.push(attendanceRec);
+                    });
+                    return out.length;
+                };
+            });
+        })();
+
+        /* Create a service representing the model */
+        (function() {
+            angular.module('schoolApp')
+                .factory("schoolService", function() {
+                    var students = ["Slappy the Frog", "Lilly the Lizard", "Paulrus the Walrus",
+            "Gregory the Goat", "Adam the Anaconda"];
+
+                    function getRandom() {
+                        return (Math.random() >= 0.5);
+                    }
+
+                    function getAttendance() {
+                        if (!localStorage.attendanceMVC) {
+                            localStorage.attendanceMVC = JSON.stringify(genAttendanceData());
+                        }
+                        return JSON.parse(localStorage.attendanceMVC);
+                    }
+
+                    function genAttendanceData() {
+                        var attendanceData = {
+                            studentDetails: [],
+                            days: 12
+                        };
+                        for (var x = 0; x < students.length; x++) {
+
+                            var attendance = [];
+                            for (var i = 0; i <= 11; i++) {
+                                attendance.push({ position: i, state: getRandom() });
+                            }
+                            attendanceData.studentDetails.push({ name: students[x], attendance: attendance });
+                        }
+                        return attendanceData;
+                    }
+
+                    function updateAttendance(newAttendance) {
+                        if (newAttendance)
+                            localStorage.attendanceMVC = JSON.stringify(newAttendance);
+                        else {
+                            localStorage.attendanceMVC = JSON.stringify(genAttendanceData());
+                        }
+                    }
+
+                    return {
+                        getAttendance: getAttendance,
+                        updateAttendance: updateAttendance
+                    }
+                });
+        })();
+
+        /* getter of module */
+        (function () {
+
+            angular
+                .module('schoolApp')
+                .controller('SchoolCtrl', ['$scope', 'schoolService', SchoolCtrl]);
+
+            function SchoolCtrl($scope, schoolService) {
+
+
+                var attendance = schoolService.getAttendance();
+                $scope.attendance = attendance;
+                $scope.number = attendance.days;
+
+                $scope.getNumber = function(num) {
+                    return new Array(num);
+                }
+
+                $scope.save = function() {
+                    schoolService.updateAttendance(attendance);
+                }
+
+                $scope.randomize = function() {
+                    schoolService.updateAttendance();
+                    attendance = schoolService.getAttendance();
+                    $scope.attendance = attendance;
+                    $scope.number = attendance.days;
+                }
+
+
+            }
+
+        })();
+
+
+    </script>
+}
+
+<h2>School Days</h2>
+
+<div ng-app="schoolApp">
+    <div ng-controller="SchoolCtrl">
+        <table>
+            <thead>
+                <tr>
+                    <th class="name-col">Student Name</th>
+                    <th ng-repeat="i in getNumber(number) track by $index">{{$index+1}}</th>
+                    <th class="missed-col">Days Missed-col</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="studentDetail in attendance.studentDetails" class="student">
+                    <td class="name-col">{{studentDetail.name}}</td>
+                    <td ng-repeat="days in studentDetail.attendance track by $index" class="attend-col">
+                        <input type="checkbox" ng-model="days.state" />
+                    </td>
+                    <td class="missed-col">{{studentDetail.attendance | posValCount}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button ng-click="save()">Save</button>
+        <button ng-click="randomize()">Randomize</button>
+    </div>    
+
+</div>
+

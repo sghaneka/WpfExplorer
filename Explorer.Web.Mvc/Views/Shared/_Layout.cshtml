@@ -1,0 +1,73 @@
+﻿@using Explorer.Web.Mvc.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/bootcss")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("css", required: false)
+</head>
+    <body>
+        <header class="container">
+            <div id="menu" class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header">
+                    <button class="btn btn-warning navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </button>
+                    <div id="logo">
+                        <a href='/'><h4>The Big Lebowski</h4></a>
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class='@String.Concat("nav ", Html.IsActive("Home","Index"))'>
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
+                        <li class='@String.Concat("nav ", Html.IsActive("Home","About"))'>
+                            @Html.ActionLink("About", "About", "Home")
+                        </li>
+                        <li class='@String.Concat("nav ", Html.IsActive("Home","Contact"))'>
+                            @Html.ActionLink("Contact", "Contact", "Home")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section id="body">
+            <section id="sidebar" class="col-md-3">
+                @{ Html.RenderAction("LeftNavMenu", "Home", new
+                   {
+                       ControllerName = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue,
+                       ActionName = ViewContext.Controller.ValueProvider.GetValue("action").RawValue
+                   }); }
+            </section>
+
+
+            <section id="main" class="col-md-9">
+                @RenderBody()
+            </section>
+
+            @Scripts.Render("~/bundles/framework")
+            @Scripts.Render("~/bundles/myscripts")
+            @RenderSection("scripts", required: false)
+        </section>
+        
+        <script language="javascript">
+            
+            var sPos = localStorage["scrollPosition"];
+            
+            if (sPos) {
+                $('#sidebar').scrollTop(sPos);
+            }
+
+            $("a", "#sidebar").click(function(e) { 
+                localStorage["scrollPosition"] = $('#sidebar').scrollTop();
+            });
+
+        </script>
+    </body>
+</html>

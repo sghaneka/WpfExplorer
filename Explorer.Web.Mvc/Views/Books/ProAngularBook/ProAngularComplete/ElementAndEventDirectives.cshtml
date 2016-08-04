@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "ElementAndEventDirectives";
+}
+@section scripts{
+
+    <script type="text/javascript">
+        (function() {
+            angular.module("exampleApp", [])
+                .controller("defaultCtrl", function ($scope) {
+                    $scope.todos = [
+                    { action: "Get groceries", complete: false },
+                    { action: "Call plumber", complete: false },
+                    { action: "Buy running shoes", complete: true },
+                    { action: "Buy flowers", complete: false },
+                    { action: "Call family", complete: false }];
+
+                    $scope.buttonNames = ["Red", "Green", "Blue"];
+
+                    $scope.message = "Tap Me!";
+
+                    $scope.settings = {
+                        Rows: "Red",
+                        Columns: "Green"
+                    };
+
+                    $scope.data = {
+                        rowColor: "Blue",
+                        columnColor: "Green"
+                    };
+
+                    $scope.handleEvent = function (e) {
+                        toastr.success("Event type: " + e.type);
+                        $scope.data.columnColor = e.type == "mouseover" ? "Green" : "Blue";
+                    }
+
+                })
+                .directive("tap", function () {
+                    return function (scope, elem, attrs) {
+                        elem.on("touchstart touchend", function () {
+                            scope.$apply(attrs["tap"]);
+                        });
+                    }
+                });
+        })()
+    </script>
+
+
+}
+<style>
+    td > *:first-child {
+        font-weight: bold;
+    }
+    tr.Red {
+        background-color: lightcoral;
+    }
+
+    tr.Green {
+        background-color: lightgreen;
+    }
+
+    tr.Blue {
+        background-color: lightblue;
+    }
+</style>
+<div ng-app="exampleApp">
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+        <h3 class="panel-header">To Do List</h3>
+        
+        <div class="well" tap="message = 'Tapped!'">
+            {{message}}
+        </div>
+        
+        <div class="well">
+            <span ng-repeat="button in buttonNames">
+                <button class="btn btn-info" ng-click="data.rowColor = button">
+                    {{button}}
+                </button>
+            </span>
+        </div>
+        
+        <div class="row well">
+            <div class="col-xs-6" ng-repeat="(key, val) in settings">
+                <h4>{{key}}</h4>
+                <div class="radio" ng-repeat="button in buttonNames">
+                    <label>
+                        <input type="radio" ng-model="settings[key]"
+                               value="{{button}}">{{button}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!--
+            <div class="checkbox well">
+                <label>
+                    <input type="checkbox" ng-model="todos[2].complete" />
+                    Item 3 is complete
+                </label>
+            </div> -->
+
+        <table class="table">
+            <thead>
+                <tr><th>#</th><th>Action</th><th>Done</th></tr>
+            </thead>
+            <tr ng-repeat="item in todos" ng-class="data.rowColor" ng-mouseenter="handleEvent($event)" 
+                ng-mouseleave="handleEvent($event)">
+                <td>{{$index + 1}}</td>
+                <!-- <td ng-repeat="prop in item">{{prop}}</td> -->
+                <td>{{item.action}}</td>
+                <td ng-style="{'background-color': settings.Columns}">
+                    {{item.complete}}
+                    <!--
+            <span ng-hide="item.complete">(Incomplete)</span>
+            <span ng-show="item.complete">(Done)</span> -->
+                    <!-- <span ng-if="!item.complete">(Incomplete)</span>
+            <span ng-if="item.complete">(Done)</span> -->
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

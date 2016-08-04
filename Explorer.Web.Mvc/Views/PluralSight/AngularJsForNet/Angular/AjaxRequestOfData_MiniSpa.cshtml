@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "AjaxRequestOfData_MiniSpa";
+}
+
+<h2>AjaxRequestOfData_MiniSpa</h2>
+
+@section scripts
+{
+    <script src="~/myscripts/angularjsfor_net_course/registration-module-spa.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Courses/courses-controller-with-repo.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Instructors/instructors-controller-with-repo.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Courses/course-repository.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Instructors/instructor-repository.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Account/account-controller.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Account/account-repository.js"></script>
+    <script type="text/javascript">
+        registrationModule.config(function ($routeProvider, $locationProvider) {
+            $routeProvider.when('/Angular/RegistrationAjax/Courses', {
+                templateUrl: '/templates/AngularJsForNetCourse/courses.html',
+                controller: 'CoursesController'
+            });
+            $routeProvider.when('/Angular/RegistrationAjax/Instructors', {
+                templateUrl: '/templates/AngularJsForNetCourse/instructors.html',
+                controller: 'InstructorsController'
+            });
+            $routeProvider.when('/Angular/RegistrationAjax/CreateAccount', {
+                templateUrl: '/templates/AngularJsForNetCourse/add-instructor.html',
+                controller: 'AccountController'
+            });
+
+            $locationProvider.html5Mode(true);
+        });
+    </script>
+}
+
+<div class="container" ng-app="registrationModule">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="navbar navbar-default">
+                <div class="navbar-header">
+                    <ul class="nav navbar-nav">
+                        <li><span class="navbar-brand">Registration</span></li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Angular/RegistrationAjax/Courses">Browse Catalog</a></li>
+                        <li><a href="/Angular/RegistrationAjax/Instructors">Browse Instructors</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/Angular/RegistrationAjax/CreateAccount">Add Instructor</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-view>
+
+    </div>
+</div>

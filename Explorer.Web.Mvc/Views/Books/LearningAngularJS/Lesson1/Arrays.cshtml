@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Arrays";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        function ContactsCtrl($scope) {
+            //$scope.people = ['Jack', 'Jill', 'Jane'];
+            $scope.people = [
+                { name: 'Jack', phones: ['555-2323','756-4324'] },
+                { name: 'Jill', phones: ['555-2233','324-8542'] },
+                { name: 'Jane', phones: ['555-5223','222-3232'] }
+            ];
+        }
+    </script>
+
+}
+<h3>Controllers keep data separate, not shared if reused...</h3>
+
+<div ng-app>
+    <div class="well">
+
+        <div ng-controller="ContactsCtrl">
+            <div ng-repeat="person in people">
+                {{person.name}}
+                <a href="#" ng-click="person.show_phones=true" ng-hide="person.show_phones">Show</a>
+                <a href="#" ng-click="person.show_phones=false" ng-show="person.show_phones">Hide</a>
+                <div style="margin-left:20px;" ng-show="person.show_phones">
+                    <div ng-repeat="phone in person.phones">
+                        {{phone}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

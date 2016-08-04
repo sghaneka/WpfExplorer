@@ -1,0 +1,14 @@
+﻿<Window x:Class="Explorer.WPF.Examples.Events.DirectWiringVsICommand"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Explorer.WPF.Examples.Events"
+        Title="DirectWiringVsICommand" Height="300" Width="300">
+<Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>    
+    <Grid>
+        <WrapPanel>
+            <Button Name="btnDirect" Click="btnDirect_Click">Direct</Button>
+            <Button Name="btnICommand" Command="{Binding ShowMessageCommand}" >ICommand</Button>
+        </WrapPanel>
+    </Grid>
+</Window>

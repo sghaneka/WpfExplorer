@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "GlobalVariableBootStrapOfData";
+}
+
+<h2>GlobalVariableBootStrapOfData</h2>
+
+@section scripts
+{
+<script src="~/myscripts/angularjsfor_net_course/registration-module.js"></script>
+<script src="~/myscripts/angularjsfor_net_course/Courses/courses-controller.js"></script>
+<script type="text/javascript">
+        courses = @Html.Raw(Model)
+</script>
+}
+
+<div ng-app="registrationModule" class="container" ng-controller="CoursesController">
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>Courses</th>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                </tr>
+                <tr ng-repeat="course in courses">
+                    <td>{{course.number}}</td>
+                    <td>{{course.name}}</td>
+                    <td>{{course.instructor}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

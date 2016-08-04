@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "MonolithicController";
+}
+
+<h2>MonolithicController</h2>
+
+@section scripts{    
+    <script>
+        angular.module("monoApp", [])
+        .controller("MonoCtrl", function ($scope) {
+            $scope.addresses = {};
+
+            $scope.setAddress = function (type, zip) {
+                $scope.addresses[type] = zip;
+            }
+
+            $scope.copyAddress = function () {
+                $scope.shippingZip = $scope.billingZip;
+            }
+        });
+    </script>    
+}
+
+<div ng-app="monoApp" ng-controller="MonoCtrl">
+    <div class="well">
+        <h4>Billing Zip Code</h4>
+        <div class="form-group">
+            <input class="form-control" ng-model="billingZip"/>
+        </div>
+        <button class="btn btn-primary" ng-click="setAddress('billingZip',billingZip)">
+            Save Billing
+        </button>
+    </div>
+    <div class="well">
+        <h4>Shipping Zip Code</h4>
+        <div class="form-group">
+            <input class="form-control" ng-model="shippingZip" />
+        </div>
+        <button class="btn btn-primary" ng-click="copyAddress()">Use Billing</button>
+        <button class="btn btn-primary" ng-click="setAddress('shippingZip',shippingZip)">
+            Save Shipping
+        </button>
+    </div>
+</div>

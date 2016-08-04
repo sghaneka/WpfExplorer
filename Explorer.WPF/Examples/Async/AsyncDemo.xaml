@@ -1,0 +1,40 @@
+﻿<Window x:Class="Explorer.WPF.Examples.Async.AsyncDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Explorer.WPF.Examples.Async"
+        mc:Ignorable="d"
+        Title="AsyncDemo" Height="600" Width="923">
+    <Window.Resources>
+        <!-- One style for each *type* of control on the window -->
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel HorizontalAlignment="Stretch" LastChildFill="true">
+        <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.CanContentScroll="True" Height="300" Margin="10,10,10,10" 
+    ScrollViewer.VerticalScrollBarVisibility="Auto"
+    ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <Border BorderThickness="1" BorderBrush="Black">
+                <TextBlock Name="Results" Text="Dock:Bottom" />
+            </Border>
+        </ScrollViewer>
+        <Border Background="Beige" DockPanel.Dock="Left" VerticalAlignment="Top"  >
+            <TabControl>
+                <TabItem Header="General">
+                    <WrapPanel>
+                        <Button Name="btnThread1" Click="btnThread1_Click">Simple Thread 1</Button>
+                        <Button Name="btnThreadPassingData" Click="btnThreadPassingData_Click">Passing Data to a Thread</Button>
+                        <Button Name="btnThreadCapturing" Click="btnThreadCapturing_Click">Capturing Variables</Button>
+                        <Button Name="btnThreadException" Click="btnThreadException_Click">Capturing Variables</Button>
+                    </WrapPanel>
+                </TabItem>
+                <TabItem Header="Security">
+                </TabItem>
+                <TabItem Header="Details">
+                </TabItem>
+            </TabControl>
+        </Border>
+    </DockPanel>
+</Window>

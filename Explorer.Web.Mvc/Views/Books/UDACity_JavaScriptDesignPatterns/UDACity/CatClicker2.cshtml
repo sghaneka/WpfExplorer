@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "CatClicker2";
+}
+
+<h2>CatClicker2</h2>
+<div id="catImages"></div>
+
+
+@section scripts{
+    <script>
+        (function() {
+
+            $(document).ready(function() {
+                    imageClicker($('#catImages'), [
+                        '<img src="//lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&amp;h=496" alt="Cute Cat for Inspiration" title="">',
+                        '<img id="mycat" src="//lh3.ggpht.com/nlI91wYNCrjjNy5f-S3CmVehIBM4cprx-JFWOztLk7vFlhYuFR6YnxcT446AvxYg4Ab7M1Fy0twaOCWYcUk=s0#w=640&amp;h=426" alt="Cute Cat for Inspiration" title="">'
+                    ]);
+
+                }
+            );
+            function imageClicker($divToAdd, imageArray) {
+
+                var clicks = [];
+                for (var i = 0; i < imageArray.length; i++) {
+
+                    var $divCtr = $('<span>0</span>');
+                    clicks[i] = 0;
+                    // var $t = $(imageArray[i]).click({ ctr: i, $divCtr: $divCtr }, handleClick);
+                    // closure !
+                    var $t = $(imageArray[i]).click((function(numCopy) {
+                        return function() {
+                            alert(numCopy);
+                        };
+                    })(i));
+
+
+
+                    $divToAdd.append($t).append($divCtr);
+                }
+
+                function handleClick(event) {
+                    alert(event.data.ctr);
+                    clicks[event.data.ctr] = clicks[event.data.ctr] + 1;
+                    event.data.$divCtr.text(clicks[event.data.ctr]);
+                }
+
+
+        }
+
+    })();
+    </script>
+
+}

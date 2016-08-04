@@ -1,0 +1,36 @@
+﻿<Window x:Class="Explorer.WPF.Examples.MVVM_StateFull.StateFullViewModel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Explorer.WPF.Examples.MVVM_StateFull.ViewModels"
+        Title="StateFullViewModel" Height="300" Width="300">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>    
+    <Grid
+        Margin="6">
+        <StackPanel>
+            <TextBlock
+                Margin="6"
+                FontSize="20"
+                Text="What is your name?"
+                Foreground="Gray" />
+            <TextBox
+                Text="{Binding Name}"
+                Margin="6"
+                FontSize="26" />
+            <TextBlock
+                Margin="6"
+                FontSize="20"
+                Text="How shall I greet you?"
+                Foreground="Gray" />
+            <TextBox
+                Text="{Binding Greeting}"
+                Margin="6"
+                FontSize="26" />
+            <TextBlock
+                Text="{Binding Salutation}"
+                Margin="6"
+                FontSize="26" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC986383-0E0A-4491-9BF7-027E303FCB45}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Explorer.DataLayer</RootNamespace>
+    <AssemblyName>Explorer.DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdventureWorks\Address.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\AdventureWorksContext.cs" />
+    <Compile Include="AdventureWorks\AdvWorksLite.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdvWorksLite.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\AdvWorksLite.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\AdvWorksLite.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdvWorksLite.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\AdventureWorksRepository.cs" />
+    <Compile Include="AngularJsForNetCourse\CourseModelContext.cs" />
+    <Compile Include="AngularJsForNetCourse\CourseRepository.cs" />
+    <Compile Include="AngularJsForNetCourse\FakeCourseModelContext.cs" />
+    <Compile Include="AngularJsForNetCourse\IGenericRepository.cs" />
+    <Compile Include="AngularJsForNetCourse\ICourseModelContext.cs" />
+    <Compile Include="AngularJsForNetCourse\ICourseRepository.cs" />
+    <Compile Include="BreakAway\BreakAwayContext.cs" />
+    <Compile Include="BreakAway\Migrations\201501170438183_FirstOne.cs" />
+    <Compile Include="BreakAway\Migrations\201501170438183_FirstOne.Designer.cs">
+      <DependentUpon>201501170438183_FirstOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BreakAway\Migrations\BreakAwayConfiguration.cs" />
+    <Compile Include="BreakAway\Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201501031635380_Initial.cs" />
+    <Compile Include="Migrations\201501031635380_Initial.Designer.cs">
+      <DependentUpon>201501031635380_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AngularJsForNetCourse\Migrations\Configuration.cs" />
+    <Compile Include="MyFakeDbSet.cs" />
+    <Compile Include="WebMenu\FakeMenuRepository.cs" />
+    <Compile Include="AdventureWorks\IAdventureWorksContext.cs" />
+    <Compile Include="AdventureWorks\Customer.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\CustomerAddress.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="confusings\DataBaseFirstRepository.cs" />
+    <Compile Include="confusings\IEntityRepository.cs" />
+    <Compile Include="AdventureWorks\ISalesRepository.cs" />
+    <Compile Include="confusings\IUnitOfWork.cs" />
+    <Compile Include="confusings\MockUnitOfWork.cs" />
+    <Compile Include="WebMenu\IWebMenuRepository.cs" />
+    <Compile Include="WebMenu\MenuRepository.cs" />
+    <Compile Include="AdventureWorks\Product.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\ProductCategory.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\ProductDescription.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\ProductModel.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\ProductModelProductDescription.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AdventureWorks\SalesOrderDetail.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\SalesOrderHeader.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorks\StatesReference.cs">
+      <DependentUpon>AdvWorksLite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="confusings\UnitOfWorkSales.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AdventureWorks\AdvWorksLite.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdvWorksLite.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AdventureWorks\AdvWorksLite.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdvWorksLite.edmx</DependentUpon>
+      <LastGenOutput>AdvWorksLite.Context.cs</LastGenOutput>
+    </None>
+    <None Include="AdventureWorks\AdvWorksLite.edmx.diagram">
+      <DependentUpon>AdvWorksLite.edmx</DependentUpon>
+    </None>
+    <None Include="AdventureWorks\AdvWorksLite.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdvWorksLite.edmx</DependentUpon>
+      <LastGenOutput>AdvWorksLite.cs</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Explorer.DomainClasses\Explorer.DomainClasses.csproj">
+      <Project>{036c8c9e-42ff-4a1d-9792-1bc0062b385d}</Project>
+      <Name>Explorer.DomainClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Explorer.Utils\Explorer.Utils.csproj">
+      <Project>{35274b1b-c42a-4b61-adc2-674719c8e59f}</Project>
+      <Name>Explorer.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BreakAway\Migrations\201501170438183_FirstOne.resx">
+      <DependentUpon>201501170438183_FirstOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501031635380_Initial.resx">
+      <DependentUpon>201501031635380_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

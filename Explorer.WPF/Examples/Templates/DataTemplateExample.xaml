@@ -1,0 +1,27 @@
+﻿<Window x:Class="Explorer.WPF.Examples.Templates.DataTemplateExample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DataTemplateExample" Height="300" Width="300">
+    <Window.Resources>
+        <DataTemplate x:Key="PersonDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding LastName}"/>
+                <TextBlock Text=", "/>
+                <TextBlock Text="{Binding FirstName}" x:Name="FirstName"/>
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding LastName}" Value="Doe">
+                    <Setter TargetName="FirstName" Property="Foreground" Value="Red"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <Style TargetType="{x:Type ItemsControl}" x:Key="PersonListStyle">
+            <Setter Property="ItemTemplate" Value="{StaticResource PersonDataTemplate}"></Setter>
+            <Setter Property="Background" Value="Blue"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ItemsControl x:Name="PersonList" Style="{StaticResource PersonListStyle}">
+        </ItemsControl>
+    </Grid>
+</Window>

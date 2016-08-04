@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "CatClicker3";
+}
+
+@section css
+{
+    
+}
+
+<h2>CatClicker3</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            Pick A Cat:<select style="margin-left: 15px;" id="catSelect"></select>
+        </div>
+        <div id="catImage" class="col-md-3"></div>
+        <div id="catClicks" class="col-md-3 col-md-offset-2"></div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script>
+        (function() {
+
+            $(document).ready(function() {
+                init(CatData);
+                    $('#catSelect').trigger('change');
+                }
+            );
+
+            var CatData = (function() {
+
+                function getData() {
+                    return [
+                        { name: 'felix', image: '<img src="//lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&amp;h=496" alt="Cute Cat for Inspiration" title="" width=300 height=300>' },
+                        { name: 'alex', image: '<img src="//lh3.ggpht.com/nlI91wYNCrjjNy5f-S3CmVehIBM4cprx-JFWOztLk7vFlhYuFR6YnxcT446AvxYg4Ab7M1Fy0twaOCWYcUk=s0#w=640&amp;h=426" alt="Cute Cat for Inspiration" title="" width=300 height=200>' },
+                        { name: 'ralph', image: '<img src="//lh5.ggpht.com/LfjkdmOKkGLvCt-VuRlWGjAjXqTBrPjRsokTNKBtCh8IFPRetGaXIpTQGE2e7ZCUaG2azKNkz38KkbM_emA=s0#w=640&amp;h=454" alt="Cute Cat for Inspiration" title="" width=300 height=200>' },
+                        { name: 'hal', image: '<img src="http://images4.fanpop.com/image/photos/20500000/Cute-cat-random-20510739-1024-768.jpg" width=300 height=200>' },
+                        { name: 'moo', image: '<img src="http://cdn2.hellogiggles.com/wp-content/uploads/2014/07/22/you-popular-cute-cat-the-very-creative_113506.jpg" width=300 height=200>' }
+                    ];
+                }
+
+                return {
+                    getData: getData
+                };
+
+            })();
+
+            function init(catDataProvider) {
+                var catData = catDataProvider.getData();
+                $.each(catData, function(key, value) {
+                    // take image tag and add handler on it
+                    $('#catSelect')
+                        .append($("<option data-value='" + JSON.stringify(value) + "'></option>")
+                            .text(value.name));
+                });
+
+                $('#catSelect').on('change', function () {
+                    var selCat = $(this).find(":selected").data("value");
+                    var $imageCat = $(selCat.image);
+                    $imageCat.click(function() {
+                        selCat.hits = selCat.hits + 1;
+                        $('#catClicks').text(selCat.hits);
+                    });
+                    $('#catImage').empty().append($imageCat);
+                    if (!selCat.hits) selCat.hits = 0;
+                    $('#catClicks').text(selCat.hits);
+                });
+            }
+
+        })();
+    </script>
+
+}

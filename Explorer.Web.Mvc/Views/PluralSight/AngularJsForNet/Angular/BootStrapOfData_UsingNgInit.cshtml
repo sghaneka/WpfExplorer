@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "BasicBootStrapOfData";
+}
+
+<h2>BasicBootStrapOfData</h2>
+
+<div ng-app class="container" ng-init="courses = @Html.Raw(Model)">
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>Courses</th>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                </tr>
+                <tr ng-repeat="course in courses">
+                    <td>{{course.number}}</td>
+                    <td>{{course.name}}</td>
+                    <td>{{course.instructor}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

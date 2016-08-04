@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "CatClicker3";
+}
+
+@section css
+{
+    <style>
+        .row {
+            margin-top: 10px;
+        }
+
+        #catImage {
+            margin-bottom: 15px;
+        }
+    </style>
+}
+
+<h2>CatClicker3</h2>
+<div ng-app="catApp" class="container">
+    <div ng-controller="CatCtrl" class="row">
+        <div class="col-md-8">
+            Pick A Cat:<select style="margin-left: 15px;" id="catSelect" ng-model="selectedCat" ng-options="cat.name for cat in cats">                           
+                       </select>
+            <div class="row">
+                <div class="col-md-6">
+                    <div><img id="catImage" width="300" height="300" alt="Cute Cat For Inspiration" ng-src="{{selectedCat.imageSrc}}" ng-click="imageClick()" /></div>
+                    Clicks: <span id="catClicks">{{selectedCat.hits}}</span>
+                </div>
+                <div class="col-md-6">
+                    <button id="btnAdmin" ng-click="adminClick()">{{getAdminText()}}</button>
+                    <div id="pnlAdmin" ng-show="showAdmin">
+                        <div class="row">
+                            <label for="catName" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="catName" ng-model="editedCat.name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="catImageInput" class="col-sm-2 control-label">Image</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="catImageInput" ng-model="editedCat.imageSrc">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="hitCount" class="col-sm-2 control-label">Hit Count</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="hitCount" ng-model="editedCat.hits">
+                            </div>
+                        </div>
+                        <button id="btnSave" ng-click="saveClick()">Save</button>
+                        <button id="btnCancel" ng-click="cancelClick()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+
+        (function() {
+            angular.module("catApp", []);
+        })();
+
+        // create a service representing the model
+        (function() {
+            angular.module("catApp")
+                .factory("catService", function() {
+                    function getCats() {
+                        var catArray = [
+                            { name: 'felix', hits: 0, imageSrc: "//lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&amp;h=496", id: 1 },
+                            { name: 'alex', hits: 0, imageSrc: "//lh3.ggpht.com/nlI91wYNCrjjNy5f-S3CmVehIBM4cprx-JFWOztLk7vFlhYuFR6YnxcT446AvxYg4Ab7M1Fy0twaOCWYcUk=s0#w=640&amp;h=426", id: 2 },
+                            { name: 'ralph', hits: 0, imageSrc: "//lh5.ggpht.com/LfjkdmOKkGLvCt-VuRlWGjAjXqTBrPjRsokTNKBtCh8IFPRetGaXIpTQGE2e7ZCUaG2azKNkz38KkbM_emA=s0#w=640&amp;h=454", id: 3 },
+                            { name: 'hal', hits: 0, imageSrc: "http://images4.fanpop.com/image/photos/20500000/Cute-cat-random-20510739-1024-768.jpg", id: 4 },
+                            { name: 'moo', hits: 0, imageSrc: "http://cdn2.hellogiggles.com/wp-content/uploads/2014/07/22/you-popular-cute-cat-the-very-creative_113506.jpg", id: 5 }
+                        ];
+                        return catArray;
+                    }
+
+                    return {
+                        getCats: getCats
+                    }
+                });
+        })();
+
+        (function() {
+            angular
+                .module('catApp')
+                .controller('CatCtrl', ['$scope', 'catService', CatCtrl]);
+
+            function CatCtrl($scope, catService) {
+                var tmpCats = catService.getCats();
+
+                $scope.$watch('selectedCat', function() {
+                    $scope.editedCat = angular.copy($scope.selectedCat);
+                });
+
+                $scope.cats = tmpCats;
+                $scope.selectedCat = tmpCats[2];
+
+                $scope.imageClick = function() {
+                    $scope.selectedCat.hits = $scope.selectedCat.hits + 1;
+                }
+                $scope.showAdmin = true;
+
+                $scope.getAdminText = function() {
+                    return $scope.showAdmin ? 'Hide Admin' : 'Show Admin';
+                }
+
+                $scope.adminClick = function() {
+                    $scope.showAdmin = !$scope.showAdmin;
+                }
+
+                $scope.cancelClick = function() {
+                    $scope.editedCat = angular.copy($scope.selectedCat);
+                }
+
+                $scope.saveClick = function() {
+                    $scope.selectedCat = $scope.editedCat;
+
+                    var idx = 0;
+
+                    $.each(tmpCats, function(index, value) {
+                        if (value.id == $scope.editedCat.id) {
+                            idx = index;
+                            return false;
+                        }
+                    });
+
+                    // now replace tmpCats with something new
+                    tmpCats[idx] = $scope.selectedCat;
+                }
+            }
+        })();
+
+
+    </script>
+
+
+
+}

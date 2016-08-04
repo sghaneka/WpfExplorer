@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "CatClicker3";
+}
+
+@section css
+{
+    <style>
+        .row {
+            margin-top:10px;
+        }
+
+        #catImage {
+            margin-bottom: 15px;
+        }
+    </style>
+}
+
+<h2>CatClicker3</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            Pick A Cat:<select style="margin-left: 15px;" id="catSelect"></select>
+            <div class="row">
+                <div class="col-md-6">
+                    <div><img id="catImage" width="300" height="300" alt="Cute Cat For Inspiration" /></div>
+                    Clicks: <span id="catClicks"></span>
+                </div>
+                <div class="col-md-6">
+                    <button id="btnAdmin">Show Admin</button>
+                    <div id="pnlAdmin">
+                        <div class="row">
+                            <label for="catName" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="catName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="catImageInput" class="col-sm-2 control-label">Image</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="catImageInput">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="hitCount" class="col-sm-2 control-label">Hit Count</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="hitCount">
+                            </div>
+                        </div>
+                        <button id="btnSave">Save</button>
+                        <button id="btnCancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script>
+        $(function() {
+
+            var catModel = (function () {
+                var selectedCat;
+                var catArray;
+
+                function init() {
+                    catArray = [
+                        { name: 'felix', hits: 0, imageSrc: "//lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&amp;h=496" , id: 1 },
+                        { name: 'alex', hits: 0, imageSrc: "//lh3.ggpht.com/nlI91wYNCrjjNy5f-S3CmVehIBM4cprx-JFWOztLk7vFlhYuFR6YnxcT446AvxYg4Ab7M1Fy0twaOCWYcUk=s0#w=640&amp;h=426", id: 2 },
+                        { name: 'ralph', hits: 0, imageSrc: "//lh5.ggpht.com/LfjkdmOKkGLvCt-VuRlWGjAjXqTBrPjRsokTNKBtCh8IFPRetGaXIpTQGE2e7ZCUaG2azKNkz38KkbM_emA=s0#w=640&amp;h=454" , id: 3 },
+                        { name: 'hal', hits: 0, imageSrc: "http://images4.fanpop.com/image/photos/20500000/Cute-cat-random-20510739-1024-768.jpg", id: 4 },
+                        { name: 'moo', hits: 0, imageSrc: "http://cdn2.hellogiggles.com/wp-content/uploads/2014/07/22/you-popular-cute-cat-the-very-creative_113506.jpg" , id: 5 }
+                    ];
+                    selectedCat = catArray[3];
+                }
+
+                function getCats() {
+                    return catArray;
+                }
+
+                function getSelectedCat() {
+                    return selectedCat;
+                }
+
+                function setSelectedCatById(catId) {
+                    selectedCat = $.grep(catArray, function(v) {
+                        return v.id == catId;
+                    })[0];
+                }
+
+                function updateHitClickForSelectedCat() {
+                    selectedCat.hits = selectedCat.hits + 1;
+                }
+
+                return {
+                    init: init,
+                    getSelectedCat: getSelectedCat,
+                    getCats: getCats,
+                    setSelectedCatById: setSelectedCatById,
+                    updateHitClickForSelectedCat: updateHitClickForSelectedCat
+                }
+
+            })();
+
+            var octopus = (function () {
+
+                var showAdmin = false;
+
+                function getCats() {
+                    return catModel.getCats();
+                }
+
+                function setSelectedCatById(catId) {
+                    catModel.setSelectedCatById(catId);
+                    viewCatDetail.render();
+                }
+
+                function getSelectedCat() {
+                    return catModel.getSelectedCat();
+                }
+
+                function updateHitClickForSelectedCat() {
+                    catModel.updateHitClickForSelectedCat();
+                    viewCatDetail.render();
+                }
+
+                function init() {
+                    catModel.init();
+                    viewCatList.init();
+                    viewCatList.render();
+                    viewCatDetail.init();
+                }
+
+                function toggleShowAdmin() {
+                    showAdmin = !showAdmin;
+                    viewCatDetail.render();
+                    viewCatList.render();
+                }
+
+                function getShowAdmin() {
+                    return showAdmin;
+                }
+
+                return {
+                    init: init,
+                    toggleShowAdmin: toggleShowAdmin,
+                    getShowAdmin: getShowAdmin,
+                    getCats: getCats,
+                    setSelectedCatById: setSelectedCatById,
+                    getSelectedCat: getSelectedCat,
+                    updateHitClickForSelectedCat: updateHitClickForSelectedCat
+                }
+
+            })();
+
+            var viewCatList = {
+                init: function () {
+
+                    $('#catSelect').on('change', function () {
+                        var selCatId = $(this).find(":selected").attr("value");
+                        octopus.setSelectedCatById(selCatId);
+                    });
+
+                },
+
+                render: function() {
+                    var catData = octopus.getCats();
+                    $('#catSelect').empty();
+
+                    $.each(catData, function (key, value) {
+                        // take image tag and add handler on it
+                        $('#catSelect')
+                            .append($("<option></option>").attr('value', value.id)
+                                .text(value.name));
+                    });
+
+                    // Force initial selection to match selectedCatId
+                    $('#catSelect option[value="' + octopus.getSelectedCat().id + '"]').prop('selected', true);
+                }
+
+               
+            };
+
+            var viewCatDetail = (function () {
+                function init() {
+                    $('#catImage').click(function() {
+                        octopus.updateHitClickForSelectedCat();
+                    });
+
+                    $('#btnAdmin').click(function() {
+                        octopus.toggleShowAdmin();
+                    });
+
+                    $('#btnSave').click(function() {
+                        octopus.getSelectedCat().name = $('#catName').val();
+                        octopus.getSelectedCat().hits = parseInt($('#hitCount').val());
+                        octopus.getSelectedCat().imageSrc = $('#catImageInput').val();
+                        octopus.toggleShowAdmin();
+                    });
+
+                    $('#btnCancel').click(function() {
+                        octopus.toggleShowAdmin();
+                    });
+
+                    render();
+                }
+
+                function render() {
+                    $('#catImage').attr('src', octopus.getSelectedCat().imageSrc);
+                    $('#catClicks').text(octopus.getSelectedCat().hits);
+                    $('#catName').val(octopus.getSelectedCat().name);
+                    $('#catImageInput').val(octopus.getSelectedCat().imageSrc);
+                    $('#hitCount').val(octopus.getSelectedCat().hits);
+
+                    if (octopus.getShowAdmin()) {
+                        $('#btnAdmin').text('Hide Admin');
+                        $('#pnlAdmin').hide();
+                    } else {
+                        $('#btnAdmin').text('Show Admin');
+                        $('#pnlAdmin').show();
+                    }
+
+                }
+
+                return {
+                    init: init,
+                    render: render
+                }
+
+            })();
+
+            octopus.init();
+        });
+
+    </script>
+
+}

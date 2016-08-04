@@ -1,0 +1,38 @@
+﻿<Window x:Class="Explorer.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/MainTopicsDict.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Status:</TextBlock>
+            <TextBox TextWrapping="Wrap" Margin="10,10,10,10" AcceptsReturn="True" Height="50"  VerticalScrollBarVisibility="Visible" Width="466"></TextBox>
+        </StackPanel>        
+        <Grid DockPanel.Dock="Left" Name="grdMain">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="254*"></RowDefinition>
+                <RowDefinition Height="57*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="175"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Name="mainScroll" Grid.RowSpan="2">
+                <TreeView Name="tvMain" MouseDoubleClick="TvMain_OnMouseDoubleClick"  ItemsSource="{Binding Source={StaticResource sectionProvider}, XPath=//WPFSection}">
+                </TreeView>
+            </ScrollViewer>
+            <StackPanel Grid.Column="1" Grid.RowSpan="2">
+                <Frame Name="frameHost"  />
+            </StackPanel>
+        </Grid>
+
+    </DockPanel>
+    
+</Window>

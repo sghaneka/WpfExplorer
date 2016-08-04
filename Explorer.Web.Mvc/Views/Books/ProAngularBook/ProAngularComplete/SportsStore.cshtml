@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "SportsStore";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        (function() {
+            angular.module("sportsStore", ["customFilters", "cart"]);
+        })();        
+    </script>
+    <script src="~/myscripts/proangular_js/sports_store/controllers/sportsStore.js"></script>
+    <script src="~/myscripts/proangular_js/sports_store/filters/customFilters.js"></script>
+    <script src="~/myscripts/proangular_js/sports_store/controllers/productListControllers.js"></script>
+    <script src="~/myscripts/proangular_js/sports_store/components/cart/cart.js"></script>
+}
+
+<div ng-app="sportsStore" ng-controller="sportsStoreCtrl">
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" data-ng-href="#">SPORTS STORE</a>
+        <cart-summary/>
+    </div>
+    <div class="alert alert-danger" ng-show="data.error">
+        Error ({{data.error.status}}). The product data was not loaded.
+        <a href="/PAB_ToDoList/SportsStore" class="alert-link">Click here to try again.</a>
+    </div>
+    
+    <ng-include src="'/myscripts/proangular_js/sports_store/views/productList.html'"></ng-include>
+
+</div>

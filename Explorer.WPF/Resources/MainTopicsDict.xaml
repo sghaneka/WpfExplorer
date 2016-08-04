@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <HierarchicalDataTemplate DataType="WPFSection"
+                              ItemsSource="{Binding}">
+        <TextBlock FontWeight="Bold" Text="{Binding XPath=@SectionTitle}"></TextBlock>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate DataType="Topic"
+                              ItemsSource="{Binding}">
+        <TextBlock Text="{Binding XPath=@Title}"/>
+    </HierarchicalDataTemplate>
+
+
+    <XmlDataProvider x:Key="sectionProvider" XPath="/Sections">
+    </XmlDataProvider>    
+</ResourceDictionary>

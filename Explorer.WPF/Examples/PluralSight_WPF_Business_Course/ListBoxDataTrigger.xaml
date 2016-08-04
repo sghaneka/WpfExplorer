@@ -1,0 +1,29 @@
+﻿<Window x:Class="Explorer.WPF.Examples.PluralSight_WPF_Business_Course.ListBoxDataTrigger"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dataLayer="clr-namespace:Explorer.DataLayer;assembly=Explorer.DataLayer"
+        xmlns:confusings="clr-namespace:Explorer.DataLayer.confusings;assembly=Explorer.DataLayer"
+        WindowStartupLocation="CenterScreen" MaxWidth="500" MaxHeight="400"
+        Title="DataTrigger" Height="350" Width="525">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="odpCust" 
+                            ObjectType="{x:Type confusings:DatabaseFirstRepository}"
+                            MethodName="GetAllCustomers"></ObjectDataProvider>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Title}" Value="Mr.">
+                    <Setter Property="Foreground" Value="Blue"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Title}" Value="Ms.">
+                    <Setter Property="Foreground" Value="Red"></Setter>
+                </DataTrigger>                
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ListBox FontSize="16" Name="lstData" ItemsSource="{Binding Source={StaticResource odpCust}}"
+                 DisplayMemberPath="LastName" SelectedValuePath="CustomerId">
+            
+        </ListBox>
+    </Grid>
+</Window>

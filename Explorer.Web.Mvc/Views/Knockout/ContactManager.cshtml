@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Example2";
+}
+
+@section scripts
+{
+    
+    
+    <script src="~/myscripts/SG.ContactManager.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            sg.cvm = {
+                "ContactList": ko.observableArray(DataManager.contacts()),
+                "selectedValue": ko.observable(452),
+                "FirstName": ko.observable(''),
+                "LastName": ko.observable(''),
+                "MiddleName": ko.observable(''),
+                "CompanyName": ko.observable(''),
+                "SalesPerson": ko.observable(''),
+                "EmailAddress": ko.observable(''),
+                "Phone": ko.observable('')
+            };
+
+            sg.cvm.removeSelectedContact = function () {
+                $('#confirmDialog').modal('show');
+            };
+
+            sg.cvm.addContact = function() {
+                $('#addContactDialog').modal('show');
+            }
+
+            ko.applyBindings(sg.cvm);
+
+            $("#confirmDialog div.modal-footer").on("click", "button.confirm_delete_the_item", function () {
+                sg.cvm.ContactList.remove(function (item) { return item.CustomerID == sg.cvm.selectedValue(); });
+                $('#confirmDialog').modal('hide');
+            });
+
+            $("#addContactDialog div.modal-footer").on("click", "button.save_changes", function () {
+                sg.cvm.ContactList.push({
+                    "CustomerID": 4523,
+                    "FirstName": sg.cvm.FirstName(),
+                    "LastName": sg.cvm.LastName(),
+                    "MiddleName": "A",
+                    "CompanyName": "EDS",
+                    "SalesPerson": "Ed Mcneil",
+                    "EmailAddress": "sghaneka@yahoo.com",
+                    "Phone": "973-424-4233"
+                });
+
+
+                $('#addContactDialog').modal('hide');
+            });
+
+        });
+    </script>
+}
+
+
+<div>
+    <h3>Knockout: Select Box and event that fires on selection</h3>
+    <div class="col-md-3">
+        <select size="4" class="form-control" data-bind="options: ContactList, optionsValue: 'CustomerID', optionsText: function(item) {return item.FirstName + ', ' + item.LastName }, value: selectedValue"></select>
+        <div class="buffer">
+            <button class="btn-info" data-bind="click: addContact">Add...</button>
+            <button class="btn-info bufferleft" data-bind="click: removeSelectedContact, enable: ContactList().length > 0 && selectedValue">Delete</button>
+        </div>
+
+
+    </div>
+    
+    <div class="modal fade" id="confirmDialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Delete?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info confirm_delete_the_item">Yes</button>
+                    <button class="btn btn-warning" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/html" id="userEditTemplate">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">First Name</label>
+                <div class="col-sm-10">
+                    <input type="text" id="firstName" name="firstName" class="form-control" data-bind="value: FirstName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">Last Name</label>
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-bind="value: LastName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">Company Name</label>
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-bind="value: CompanyName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">Sales Person</label>
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-bind="value: SalesPerson" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">Email Address</label>
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-bind="value: EmailAddress" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">Phone</label>
+                <div class="col-sm-10">
+                    <input type="text" id="lastName" name="lastName" class="form-control" data-bind="value: Phone" />
+                </div>
+            </div></form>
+    </script>
+
+        <div class="modal fade" id="addContactDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body" data-bind="template: {name: 'userEditTemplate'}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save_changes">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+</div>

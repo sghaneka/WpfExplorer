@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Angular index";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        function TextController($scope) {
+            $scope.someText = "You have started your journey.";
+        }
+    </script>
+
+}
+
+<h2>Index</h2>
+
+<div ng-app>
+    <div ng-controller="TextController">
+        <p>{{someText}}</p>
+    </div>
+
+    <div class="container" ng-init="courses = [
+        {number: 'CREA101', name: 'Care of Magical Creatures', instructor: 'Rubeus Hagrid'},
+     {number: 'DARK502', name: 'Defence Against the Dark Arts', instructor: 'Severus Snape'},
+     {number: 'TRAN201', name: 'Transfiguration', instructor: 'Minerva McGonagall'}
+     ]">
+        <div class="row">
+            <div class="col-md-10">
+                <table class="table table-condensed table-hover">
+                    <tr>
+                        <th>Courses</th>
+                        <th>Course Name</th>
+                        <th>Instructor</th>
+                    </tr>
+                    <tr ng-repeat="course in courses">
+                        <td>{{course.number}}</td>
+                        <td>{{course.name}}</td>
+                        <td>{{course.instructor}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

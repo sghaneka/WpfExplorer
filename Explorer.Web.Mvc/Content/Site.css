@@ -1,0 +1,35 @@
+﻿body {
+    margin-top: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#menu {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.noborder {
+    border: none;
+}
+
+#body {
+    padding-top: 20px;
+}
+
+.pushup {
+    margin-bottom: -2px;
+}
+
+.buffer {
+    margin-top: 10px;
+}
+
+.bufferleft {
+    margin-left: 10px;
+}
+
+#sidebar {
+    height: 600px;
+    overflow-y: scroll;
+}

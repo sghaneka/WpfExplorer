@@ -1,0 +1,41 @@
+﻿<Window x:Class="Explorer.WPF.Examples.PluralSight_WPF_Business_Course.ListBoxDemo1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:Explorer;assembly=Explorer.DataLayer"
+        xmlns:dataLayer="clr-namespace:Explorer.DataLayer;assembly=Explorer.DataLayer"
+        xmlns:confusings="clr-namespace:Explorer.DataLayer.confusings;assembly=Explorer.DataLayer"
+        WindowStartupLocation="CenterScreen" MaxWidth="500" MaxHeight="400"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="odpCust" 
+                            ObjectType="{x:Type confusings:DatabaseFirstRepository}"
+                            MethodName="GetAllCustomers"></ObjectDataProvider>
+    </Window.Resources>
+    <Grid>
+        <ListBox Name="lstData" 
+                 ItemsSource="{Binding Source={StaticResource odpCust}}" 
+                 Background="Beige"
+                 IsSynchronizedWithCurrentItem="True">
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                                 Color="CadetBlue"></SolidColorBrush>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" 
+                                 Color="LightGray"></SolidColorBrush>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" Margin="6,2,6,2" Padding="4,4,4,4" BorderThickness="2" CornerRadius="10" Background="Aqua" Width="250">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left"
+                                Margin="8">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="16" Width="200" Content="{Binding Path=LastName}"></Label>
+                                <Label FontSize="16" Width="100" Content="{Binding Path=FirstName}"></Label>
+                            </StackPanel>
+                            <Label FontSize="12" Content="{Binding Path=EmailAddress}"></Label>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

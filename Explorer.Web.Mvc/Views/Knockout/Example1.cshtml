@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            sg.vm = {
+                firstName: ko.observable("John")
+            };
+
+            ko.applyBindings(sg.vm, document.getElementById("part1"));
+
+            var data = {
+                "Id": 1001,
+                "SalePrice": 1649.01,
+                "ListPrice": 2199.00,
+                "ShortDesc": "Taylor 314CE",
+                "Description": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar"
+            };
+
+            // The ViewModel
+            var viewmodel = function () {
+                this.id = ko.observable(data.Id);
+                this.salePrice = ko.observable(data.SalePrice);
+                this.listPrice = ko.observable(data.ListPrice);
+                this.shortDesc = ko.observable(data.ShortDesc);
+                this.description = ko.observable(data.Description);
+                this.formatCurrency = function (value) {
+                    return "$" + value().toFixed(2);
+                };
+            };
+
+            // Bind the ViewModel to the View using Knockout
+            ko.applyBindings(new viewmodel(), document.getElementById("part2"));
+        });
+    </script>
+}
+
+
+<div>
+    <h1>Knockout: What is Knockout?</h1>
+    <div id="part1">
+        <input data-bind="value: firstName" />
+    </div>
+    <div id="part2">
+        <span data-bind="text: shortDesc"></span>
+        <div data-bind="text: description"></div>
+        <span data-bind="text: formatCurrency(salePrice)"></span>
+    </div>
+</div>

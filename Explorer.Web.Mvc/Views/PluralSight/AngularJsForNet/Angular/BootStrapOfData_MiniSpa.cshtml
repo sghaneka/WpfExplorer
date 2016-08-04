@@ -1,0 +1,58 @@
+﻿@model Explorer.Web.Mvc.ViewModels.AngularJsForNetCourse.Registration.RegistrationVm
+
+@{
+    ViewBag.Title = "BootStrapOfData_MiniSpa";
+}
+
+<h2>BootStrapOfData_MiniSpa</h2>
+
+@section scripts
+{
+    <script src="~/myscripts/angularjsfor_net_course/registration-module-spa.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Courses/courses-controller-with-service.js"></script>
+    <script src="~/myscripts/angularjsfor_net_course/Instructors/instructors-controller.js"></script>
+    <script type="text/javascript">
+        
+       registrationModule.config(function ($routeProvider, $locationProvider) {
+            $routeProvider.when('/Angular/RegistrationBootStrap/Courses', {
+                templateUrl: '/templates/AngularJsForNetCourse/courses.html',
+                controller: 'CoursesController'
+            });
+            $routeProvider.when('/Angular/RegistrationBootStrap/Instructors', {
+                templateUrl: '/templates/AngularJsForNetCourse/instructors.html',
+                controller: 'InstructorsController'
+            });
+
+            $locationProvider.html5Mode(true);
+
+        });
+
+        registrationModule.factory('bootstrappedData', function() {
+            return {
+                courses: @Html.Raw(Model.Courses),
+                instructors: @Html.Raw(Model.Instructors)
+            };
+        });
+    </script>
+}
+
+<div class="container" ng-app="registrationModule">
+    <div class="row">
+        <div class="navbar navbar-default">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li><span class="navbar-brand">Registration</span></li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Angular/RegistrationBootStrap/Courses">Browse Catalog</a></li>
+                    <li><a href="/Angular/RegistrationBootStrap/Instructors">Browse Instructors</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div ng-view>
+
+    </div>
+</div>
