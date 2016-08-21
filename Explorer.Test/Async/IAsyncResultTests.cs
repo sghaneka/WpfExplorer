@@ -49,6 +49,8 @@ namespace Explorer.Test.Async
             }, method);
 
             _complete.WaitOne();
+
+            //adding a comment and then some...
         }
 
         [TestMethod]
