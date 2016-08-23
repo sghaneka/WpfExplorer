@@ -10,19 +10,29 @@ namespace Explorer.Test.Async
     public class TaskTests
     {
         [TestMethod]
-        public void TaskTest1()
+        public void SimpleTaskTest1()
         {
             var web = new WebClient();
             Console.WriteLine("Starting work");
-            Task<string> getTask = web.DownloadStringTaskAsync("http://wpf/Jaju/LongRunningRequestWithError?sleepTime=3000");
-            Console.WriteLine("Setting up continuation");
-            getTask.ContinueWith(t =>
+            // Task<string> getTask = web.DownloadStringTaskAsync("http://wpf/Jaju/LongRunningRequestWithError?sleepTime=3000");
+
+            Task<string> task1 = Task.Run(() =>
             {
+                System.Threading.Thread.Sleep(3000);
+                return "result";
+            });
+
+
+            Console.WriteLine("Setting up continuation");
+
+            task1.ContinueWith(t =>
+            {
+                Console.WriteLine("In continuation");
                 Console.WriteLine(t.IsFaulted);
                 Console.WriteLine(t.Exception);
-                Console.WriteLine("In continuation");
                 Console.WriteLine(t.Result);
             });
+
             Console.WriteLine("Continuing on main thread");
             GC.Collect();
             Thread.Sleep(10000);
