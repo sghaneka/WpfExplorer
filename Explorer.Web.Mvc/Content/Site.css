@@ -33,3 +33,7 @@
     height: 600px;
     overflow-y: scroll;
 }
+
+.list-group {
+    margin-bottom: 0px;
+}
