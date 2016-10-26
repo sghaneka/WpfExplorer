@@ -1,7 +1,7 @@
 ﻿body {
-    margin-top: 70px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-top: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 #menu {
@@ -14,7 +14,8 @@
 }
 
 #body {
-    padding-top: 20px;
+    padding-top: 30px;
+    margin-left: -0px;
 }
 
 .pushup {
@@ -32,6 +33,7 @@
 #sidebar {
     height: 600px;
     overflow-y: scroll;
+    font-size: 80%;
 }
 
 .list-group {

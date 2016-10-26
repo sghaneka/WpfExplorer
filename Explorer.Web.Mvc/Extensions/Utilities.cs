@@ -21,7 +21,7 @@ namespace Explorer.Web.Mvc.Extensions
             var returnActive = control == routeControl &&
                                action == routeAction;
 
-            return returnActive ? "active1" : "";
+            return returnActive ? "active" : "";
         }
 
         public static string IsActive(this HtmlHelper html,
@@ -34,7 +34,7 @@ namespace Explorer.Web.Mvc.Extensions
             var returnActive = control == routeControl &&
                                action == routeAction;
 
-            return returnActive ? "active1" : "";
+            return returnActive ? "active" : "";
         }
     }
 }

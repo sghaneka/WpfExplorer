@@ -5,6 +5,35 @@
     Layout = null;
 }
 
+@*<div>
+    @foreach (var leftMenu in Model.LeftNavMenu)
+    {
+        @leftMenu.Name
+        <ul>
+            @foreach (var topMenu in leftMenu.MenuItems)
+            {
+                <li class='@String.Concat("", Html.IsActive(@Model.Controller, @Model.ActionName, topMenu.ControllerName, topMenu.ActionName))'>
+                    @Html.ActionLink(topMenu.Name, topMenu.ActionName, topMenu.ControllerName)
+                </li>
+            }
+            @foreach (var subMenus in leftMenu.Menus)
+            {
+                <li>
+                    @subMenus.Name
+                    <ul>
+                        @foreach (var topMenu in subMenus.MenuItems)
+                        {
+                            <li>
+                                @Html.ActionLink(topMenu.Name, topMenu.ActionName, topMenu.ControllerName, null, new { @class = String.Concat("list-group-item noborder ", Html.IsActive(@Model.Controller, @Model.ActionName, topMenu.ControllerName, topMenu.ActionName)) })
+                            </li>
+                        }
+                    </ul>
+
+                </li>
+            }
+        </ul>
+    }
+</div>*@
 
 <div class="list-group">
     @foreach (var leftMenu in Model.LeftNavMenu)
@@ -19,7 +48,7 @@
                     </div>
                 }
             </div>
-                        @foreach (var subMenus in leftMenu.Menus)
+            @foreach (var subMenus in leftMenu.Menus)
             {
                 <div class="list-group">
                     <div class=" list-group-item noborder">
